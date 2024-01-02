@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mini Day</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .card {
+          background-color: #FED7E2; /* Un tono rosa claro */
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          width: 300px; /* Ancho fijo para la tarjeta */
+      }
+      .inner-card {
+          background-color: #FCE4EC; /* Un tono rosa más claro para las tarjetas internas */
+          margin-top: 10px;
+          padding: 10px;
+          border-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+      body, button, p, .inner-card {
+          font-family: 'Quicksand', sans-serif; /* Aplicar Quicksand a todo el texto */
+      }
+      h2 {
+          color: #D81B60; /* Un tono rosa fuerte para el título */
+      }
+    </style>
+    <script>
+            var categorias = {
+                "Artes y Manualidades": ["pintar", "dibujar", "hacer collages", "manualidades con materiales reciclados"],
+                "Cocina Divertida": ["hacer galletas", "decorar cupcakes", "preparar su platillo favorito"],
+                "Juegos Educativos": [
+        "juegos de mesa",
+        "jugar con Legos",
+        "aplicaciones educativas"
+      ],
+      "Lectura de Cuentos": [
+        "leer libros acordes a su edad",
+        "contar historias inventadas",
+        "discutir las historias leídas"
+      ],
+      "Actividades al Aire Libre": [
+        "pasear en el parque",
+        "bicicleta",
+        "búsqueda del tesoro",
+        "jugar con una pelota"
+      ],
+      "Experimentos Científicos": [
+        "experimentos caseros sencillos",
+        "proyectos de ciencia para niños"
+      ],
+      "Música y Baile": [
+        "aprender a tocar un instrumento",
+        "sesión de baile en casa"
+      ],
+      "Jardinería": [
+        "cultivar un jardín pequeño",
+        "cuidar plantas de interior"
+      ],
+      "Visitas Educativas": [
+        "ir a un museo",
+      ],
+      "Construcción de Rompecabezas": [
+        "armar un rompecabezas grande",
+        "rompecabezas temático"
+      ]
+            };
+
+            var categoriaSeleccionada = "";
+
+            function seleccionarCategoria() {
+                var keys = Object.keys(categorias);
+                categoriaSeleccionada = keys[Math.floor(Math.random() * keys.length)];
+                document.getElementById("categoria").innerHTML = "Categoría seleccionada: " + categoriaSeleccionada;
+                document.getElementById("categoriaCard").style.display = 'block';
+                document.getElementById("botonCategoria").style.display = 'none';
+                document.getElementById("botonActividad").style.display = 'block';
+            }
+
+            function seleccionarActividad() {
+                var actividad = categorias[categoriaSeleccionada][Math.floor(Math.random() * categorias[categoriaSeleccionada].length)];
+                document.getElementById("resultadoCategoria").innerHTML = "Categoría: " + categoriaSeleccionada;
+                document.getElementById("resultadoActividad").innerHTML = "Actividad: " + actividad;
+                document.getElementById("categoriaCard").style.display = 'none';
+                document.getElementById("botonActividad").style.display = 'none';
+                document.getElementById("resultadoFinal").style.display = 'flex';
+                document.getElementById("botonReiniciar").style.display = 'block';
+            }
+
+            function reiniciarJuego() {
+                document.getElementById("botonCategoria").style.display = 'block';
+                document.getElementById("categoriaCard").style.display = 'none';
+                document.getElementById("botonActividad").style.display = 'none';
+                document.getElementById("resultadoFinal").style.display = 'none';
+                document.getElementById("botonReiniciar").style.display = 'none';
+                categoriaSeleccionada = ""; // Reiniciar la categoría seleccionada
+            }
+    </script>
+  </head>
+  <body class="bg-pink-100">
+    <div class="flex justify-center items-center h-screen">
+      <div class="card text-center">
+        <h2 class="text-2xl mb-4 font-bold">
+          ¿Qué actividad vamos a hacer hoy?
+        </h2>
+        <button
+          id="botonCategoria"
+          onclick="seleccionarCategoria()"
+          class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded w-full mt-2"
+        >
+          Seleccionar Categoría
+        </button>
+        <div id="categoriaCard" class="inner-card" style="display:none;">
+          <p id="categoria" class="text-pink-800 text-lg"></p>
+        </div>
+        <button
+          id="botonActividad"
+          onclick="seleccionarActividad()"
+          style="display:none;"
+          class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded w-full mt-2"
+        >
+          Seleccionar Actividad
+        </button>
+
+        <div
+          id="resultadoFinal"
+          style="display:none; flex-direction: column;"
+          class="mt-4"
+        >
+          <div class="inner-card" id="resultadoCategoria"></div>
+          <div class="inner-card" id="resultadoActividad"></div>
+        </div>
+
+        <button
+          id="botonReiniciar"
+          onclick="reiniciarJuego()"
+          style="display:none;"
+          class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded w-full mt-2"
+        >
+          Iniciar de Nuevo
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
